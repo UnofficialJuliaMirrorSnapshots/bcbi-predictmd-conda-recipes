@@ -1,0 +1,26 @@
+branches:
+    except:
+        - gh-pages
+
+git:
+    depth: 99999999
+
+language: bash
+
+os:
+    - linux
+
+notifications:
+    email:
+        on_success: never # default: change
+        on_failure: always # default: always
+
+services:
+    - docker
+
+sudo: required
+
+###############################################################################
+
+script:
+    - docker run --name TRAVIS_CI_BUILD_PREDICTMD_DEPS_CONDA -v $TRAVIS_BUILD_DIR:/travisbuilddirmnt mhowison/conda-build:v2 /bin/bash -c "set -o verbose; set -o errexit; conda install -y anaconda-client; cd ~; mkdir -pv travis-build-dir-predictmd-conda-recipes; cp --recursive /travisbuilddirmnt/* travis-build-dir-predictmd-conda-recipes; cd travis-build-dir-predictmd-conda-recipes; conda build predictmd-imagemagick predictmd-pdf2svg predictmd-texlive; conda install -y --use-local predictmd-imagemagick predictmd-pdf2svg predictmd-texlive;"

@@ -1,0 +1,43 @@
+package:
+    name: "predictmd-texlive"
+    version: "20170524"
+
+requirements:
+    build:
+        - cairo
+        - git
+        - pkg-config
+        - poppler
+        - poppler-data
+        - setuptools
+    run:
+        - cairo
+        - git
+        - pkg-config
+        - poppler
+        - poppler-data
+        - setuptools
+
+test:
+    commands:
+        - command -v pdftex
+        - pdftex --version
+        - command -v bibtex
+        - bibtex --version
+        - command -v pdflatex
+        - pdflatex --version
+        - command -v latex
+        - latex --version
+        - command -v luatex
+        - luatex --version
+        - command -v lualatex
+        - lualatex --version
+        - conda inspect linkages -p $PREFIX $PKG_NAME # [not win]
+        - conda inspect objects -p $PREFIX $PKG_NAME # [osx]
+
+about:
+    home: https://github.com/DilumAluthge/predictmd-conda-recipes
+
+extra:
+    recipe-maintainers:
+        - DilumAluthge

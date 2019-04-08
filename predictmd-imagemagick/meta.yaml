@@ -1,0 +1,33 @@
+package:
+    name: "predictmd-imagemagick"
+    version: "6.9.9_47"
+
+requirements:
+    build:
+        - cairo
+        - git
+        - pkg-config
+        - poppler
+        - poppler-data
+        - setuptools
+    run:
+        - cairo
+        - git
+        - pkg-config
+        - poppler
+        - poppler-data
+        - setuptools
+
+test:
+    commands:
+        - command -v convert
+        - convert -version
+        - conda inspect linkages -p $PREFIX $PKG_NAME # [not win]
+        - conda inspect objects -p $PREFIX $PKG_NAME # [osx]
+
+about:
+    home: https://github.com/DilumAluthge/predictmd-conda-recipes
+
+extra:
+    recipe-maintainers:
+        - DilumAluthge
